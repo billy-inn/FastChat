@@ -16,6 +16,7 @@ from typing import List, Any, Dict, Union, Tuple
 class SeparatorStyle(IntEnum):
     """Separator styles."""
 
+    CHARACTER = auto()
     ADD_COLON_SINGLE = auto()
     ADD_COLON_TWO = auto()
     ADD_COLON_SPACE_SINGLE = auto()
@@ -73,6 +74,14 @@ class Conversation:
     def get_prompt(self) -> str:
         """Get the prompt for generation."""
         system_prompt = self.system_template.format(system_message=self.system_message)
+        if self.sep_style == SeparatorStyle.CHARACTER:
+            ret = system_prompt
+            for role, message in self.messages:
+                if message:
+                    ret += role + ": " + message + self.sep
+                else:
+                    ret += role + ":"
+            return ret
         if self.sep_style == SeparatorStyle.ADD_COLON_SINGLE:
             ret = system_prompt + self.sep
             for role, message in self.messages:
