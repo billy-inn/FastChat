@@ -2073,7 +2073,7 @@ register_conv_template(
 register_conv_template(
     Conversation(
         name="character",
-        system_message="<|beginningofdialog|>2024 05 30 Thursday 03 27 {character_prefix}",
+        system_message="<|beginningofdialog|>2024 05 30 Thursday 03 27 ",
         roles=("User", "Assistant"),
         sep_style=SeparatorStyle.CHARACTER,
         sep="<|endofmessage|><|beginningofmessage|>",
